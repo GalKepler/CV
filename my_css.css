@@ -508,3 +508,38 @@ strong, b { font-weight: 700; }       /* real bold */
 /* Add a subtle separator when they wrap to the same line on narrow widths */
 .details header .place::after { content: ""; margin-right: .25rem; }
 
+/* --- Header layout: title on its own line; org + location below --- */
+.details header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.details header h3 {
+  flex-basis: 100%;       /* full row */
+  display: block;
+  margin: 0 0 .1rem 0;
+  font-weight: 700;
+  clear: both;            /* in case old floats sneak in */
+}
+
+/* kill the old float layout and use flex spacing */
+.details header .place,
+.details header .location {
+  float: none !important;
+}
+
+.details header .place {
+  order: 2;               /* row 2, left by default */
+  font-weight: 600;
+}
+
+.details header .location {
+  order: 2;               /* same row, pushed right */
+  margin-left: auto;
+}
+
+/* optional: a hair more breathing room below the header line */
+.details header + div {
+  margin-top: .15rem;
+}
