@@ -248,15 +248,29 @@ English — fluent</p>
     el.innerHTML = '<div class="date"></div>' + '<div class="decorator"></div>' +
       '<div class="details"><header></header><div></div></div>' + el.innerHTML;
     var ps = el.querySelectorAll('p');
-    // move the date paragraph to the date div
+        // move the date paragraph to the date div  (END-FIRST ORDER)
     if (ps.length >= 3) {
-      s = ps[2].innerText;
-      s = s === 'N/A' ? [] : s.split(' - ');
+      s = ps[2].innerText.trim();
+
+      if (s === 'N/A') {
+        s = [];
+      } else {
+        // split on hyphen / en dash / em dash with optional spaces
+        s = s.split(/\s*[-–—]\s*/).map(function(x){ return x.trim(); });
+
+        // If it's a range like "2019 - 2025 (expected Oct)", show END first
+        if (s.length === 2) s.reverse();
+
+        // If it's a single date like "Since 2016" or "2018", leave as-is
+      }
+
       el.removeChild(ps[2]);
+
       for (j = 0; j < s.length && j < 2; j++) {
-        el.children[0].appendChild(create_el('span', false, s[j]))
+        el.children[0].appendChild(create_el('span', false, s[j]));
       }
     }
+
     // move title, description, location to the details div
     (function(h) {
       h.appendChild(el.children[3]);
