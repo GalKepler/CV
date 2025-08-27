@@ -484,3 +484,5 @@ strong, b { font-weight: 700; }       /* real bold */
 @media print {
   strong, b, .bold { font-weight: 700; }
 }
+/* Add top margin when jumping to anchors */
+#main .blocks { scroll-margin-top: 0.3in; }
