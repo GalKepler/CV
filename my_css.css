@@ -422,3 +422,36 @@ h1, h2{
 .blocks {
   break-inside: avoid;
 }
+
+/* === Emphasis & utility classes (NEW) === */
+strong, b { font-weight: 700; }   /* ensure <strong> actually looks bold with body weight 300 */
+.bold { font-weight: 700; }       /* use class="bold" for reusable emphasis */
+.hi   { font-weight: 800; }       /* extra-bold option */
+.muted{ opacity: .75; }           /* optional de-emphasis */
+
+/* === Key elements to emphasize (NEW) === */
+.details header h3 { 
+  font-weight: 700;               /* job/course title */
+  display: inline; 
+  margin-right: .25rem; 
+}
+.details header .place { 
+  font-weight: 600;               /* organization label */
+}
+.aside h2, 
+#main h2 { 
+  font-weight: 600;               /* bump section headers slightly from 400 */
+}
+
+/* === Date emphasis — for END-FIRST order (NEW) === */
+/* If you used the JS tweak that shows END date first, bold the first span: */
+#main .blocks .date span:first-child { font-weight: 700; }  /* current/end date */
+#main .blocks .date span:last-child  { opacity: .75; }      /* start date, muted */
+
+/* If you keep START-FIRST order instead, swap the two rules above:
+#main .blocks .date span:last-child  { font-weight: 700; }
+#main .blocks .date span:first-child { opacity: .75; }
+*/
+
+/* === Sidebar skill labels (NEW) === */
+#technical-skills p strong { font-weight: 700; }
