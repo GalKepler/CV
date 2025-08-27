@@ -486,3 +486,25 @@ strong, b { font-weight: 700; }       /* real bold */
 }
 /* Add top margin when jumping to anchors */
 #main .blocks { scroll-margin-top: 0.3in; }
+
+/* --- Fix header layout: title on its own line; org + location below --- */
+.details header h3 {
+  display: block;            /* was inline; block keeps it on its own row */
+  font-weight: 700;
+  margin: 0 0 .1rem 0;
+}
+
+/* Keep org left, location right; add a bit of spacing if you want */
+.details header .place    { float: left;  font-weight: 600; }
+.details header .location { float: right; }
+
+/* Ensure the header grows to contain the floats */
+.details header::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Add a subtle separator when they wrap to the same line on narrow widths */
+.details header .place::after { content: ""; margin-right: .25rem; }
+
