@@ -1,3 +1,6 @@
+/* Load Open Sans with 300, 600, 700 weights */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&display=swap");
+
 @page{
   size: A4 portrait;
   margin: 1in 0.5in 1in 0.25in;
@@ -455,3 +458,29 @@ strong, b { font-weight: 700; }   /* ensure <strong> actually looks bold with bo
 
 /* === Sidebar skill labels (NEW) === */
 #technical-skills p strong { font-weight: 700; }
+
+/* Ensure bold actually appears with Open Sans */
+body { 
+  font-family: "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
+  font-synthesis: weight style;       /* allow faux bold if a weight fails to load */
+}
+
+/* Bold utilities */
+strong, b { font-weight: 700; }       /* real bold */
+.bold { font-weight: 700; }
+.hi   { font-weight: 800; }
+
+/* Headings and key labels a bit heavier for contrast */
+#main h2, .aside h2        { font-weight: 600; }
+.details header h3         { font-weight: 700; }
+.details header .place     { font-weight: 600; }
+
+/* Dates — if you’re using END-FIRST order from the JS tweak */
+#main .blocks .date span:first-child { font-weight: 700; }  /* current/end */
+#main .blocks .date span:last-child  { opacity: .75; }      /* start, muted */
+
+/* Print/PDF safeguards */
+@media print {
+  strong, b, .bold { font-weight: 700; }
+}
