@@ -581,3 +581,8 @@ strong, b { font-weight: 700; }       /* real bold */
   page-break-before: always;   /* for PDF and older browsers */
   break-before: page;          /* for modern paged.js / print engines */
 }
+
+#awards {
+  page-break-after: always;
+  break-after: page;
+}
