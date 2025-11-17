@@ -183,8 +183,12 @@ English — fluent</p>
 
 <div id="pubs" class="section level2" data-icon="file">
 <h2>Selected Publications</h2>
-
-<div class="section level3">
+<div class="aside"></div>
+<p>For a full list of publications, see my <a href="https://orcid.org/0000-0002-5655-9423">ORCID</a> or <a href="https://scholar.google.co.il/citations?user=eBuS0KYAAAAJ&hl">Google Scholar</a> profiles.</p>
+<p>In many of these works I was involved in the capacity of a researcher or statistical consultant.</p>
+<p><em>* Denotes equal contribution.</em></p>
+</div>
+<div id="peer-reviewed-publications" class="section level3">
 <h3>Peer Reviewed Publications</h3>
 <p>N/A</p>
 <p>N/A</p>
@@ -226,8 +230,7 @@ English — fluent</p>
   els = document.getElementById('main').querySelectorAll('.level2');
   for (i = 0; i < els.length; i++) {
     el = els[i];
-    // if (i === 0 && el.id === 'title') continue;
-    if (el.parentNode.id === 'title' || el.closest('#pubs')) continue;
+    if (i === 0 && el.id === 'title') continue;
     el.className += ' main-block';
     if (el.dataset['concise']) el.className += ' concise';
     if (el.firstElementChild.firstChild && el.firstElementChild.firstChild.nodeName !== 'I') {
