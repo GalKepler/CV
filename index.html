@@ -182,9 +182,13 @@ English — fluent</p>
 </div>
 
 <div id="pubs" class="section level2" data-icon="file">
-  <h2>Selected Publications</h2>
+<h2>Selected Publications</h2>
 
-  <h3>Peer-Reviewed Publications</h3>
+<div class="section level3">
+<h3>Peer Reviewed Publications</h3>
+<p>N/A</p>
+<p>N/A</p>
+<p>N/A</p>
 <ul>
   <li><span class="bold">Kepler, G.</span>, Lifshitz, S., Assaf, Y. (2025). Aging Together, Aging Apart: Mapping the Brain’s Divergent Structural Trajectories. <em>under review</em>.</li>
   <li><span class="bold">Kepler, G.</span>, Baratz, Z., … Assaf, Y. (2025). The Privacy Paradox of Neuroimaging: Why Brain MRI Data Cannot Be Fully Anonymized. <em>under review</em>.</li>
@@ -194,6 +198,7 @@ English — fluent</p>
   <li>Salomon, T., Cohen, A., Barazany, D., <span class="bold">Kepler, G.</span>, Ben-Zvi, G., Botvinik-Nezer, R., … Assaf, Y. (2021).
     Brain volumetric changes in the general population following the COVID-19 outbreak and lockdown. <em>NeuroImage, 118311.</em><a href="https://doi.org/10.1016/j.neuroimage.2021.118311"> DOI:10.1016/j.neuroimage.2021.118311</a></li>
 </ul>
+</div>
 </div>
 </div>
 
@@ -221,7 +226,8 @@ English — fluent</p>
   els = document.getElementById('main').querySelectorAll('.level2');
   for (i = 0; i < els.length; i++) {
     el = els[i];
-    if (i === 0 && el.id === 'title') continue;
+    // if (i === 0 && el.id === 'title') continue;
+    if (el.parentNode.id === 'title' || el.closest('#pubs')) continue;
     el.className += ' main-block';
     if (el.dataset['concise']) el.className += ' concise';
     if (el.firstElementChild.firstChild && el.firstElementChild.firstChild.nodeName !== 'I') {
