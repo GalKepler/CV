@@ -576,3 +576,8 @@ strong, b { font-weight: 700; }       /* real bold */
   bottom: 0.1rem;
   border-left: var(--decorator-border);
 }
+
+#pubs {
+  page-break-before: always;   /* for PDF and older browsers */
+  break-before: page;          /* for modern paged.js / print engines */
+}
