@@ -17,7 +17,7 @@
   --content-width: calc(var(--page-width) - var(--margin-right) - var(--margin-left));
   --root-font-size: 12pt;
   --sidebar-width: 13rem;
-  --sidebar-background-color: #f2f2f2;
+  --sidebar-background-color: var(--color-sidebar-bg);
   --main-width: calc(var(--content-width) - var(--sidebar-width));
   --decorator-horizontal-margin: 0.2in;
 
@@ -28,7 +28,7 @@
   --decorator-outer-offset-left: -5.5px;
   --decorator-border-width: 1px;
   --decorator-outer-dim: 9px;
-  --decorator-border: 1px solid #ccc;
+  --decorator-border: 1px solid var(--color-rule);
 
   --row-blocks-padding-top: 0.5rem;
   --date-block-width: 0.7in;
@@ -38,6 +38,37 @@
   --viewer-background-color: #dcdcdc;
   --viewer-pages-spacing: 12px;
   --viewer-shadow-color: #313131;
+
+  /* color tokens */
+  --color-ink: #1a1a1a;
+  --color-body: #333;
+  --color-muted: #666;
+  --color-accent: #2a5b6c;
+  --color-rule: #ccc;
+  --color-bg: #fff;
+  --color-sidebar-bg: #f2f2f2;
+
+  /* spacing scale */
+  --space-1: 0.15rem;
+  --space-2: 0.3rem;
+  --space-3: 0.5rem;
+  --space-4: 0.8rem;
+  --space-5: 1.2rem;
+  --space-6: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ink: #e8e8e8;
+    --color-body: #cfcfcf;
+    --color-muted: #9a9a9a;
+    --color-accent: #7fb3c4;
+    --color-rule: #444;
+    --color-bg: #121212;
+    --color-sidebar-bg: #1c1c1c;
+    --viewer-background-color: #0a0a0a;
+    --decorator-border: 1px solid #444;
+  }
 }
 
 .pagedjs_page {
@@ -46,7 +77,7 @@
 }
 
 @page{
-  background: linear-gradient(to left, var(--sidebar-background-color), var(--sidebar-background-color) var(--sidebar-background-width), white var(--sidebar-background-width));
+  background: linear-gradient(to left, var(--sidebar-background-color), var(--sidebar-background-color) var(--sidebar-background-width), var(--color-bg) var(--sidebar-background-width));
 }
 
 html {
@@ -58,14 +89,17 @@ body{
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
   line-height: 1.3;
-  color: #444;
+  color: var(--color-body);
+  background: var(--color-bg);
   hyphens: auto;
 }
 
 h1, h2, h3{
   margin: 0;
-  color: #000;
+  color: var(--color-ink);
 }
+
+a { color: var(--color-accent); }
 
 #main > h1, #aside > h1, #disclaimer > h2 {
   display: none;
@@ -142,7 +176,7 @@ h1, h2{
   left: calc((var(--date-block-width) + var(--decorator-horizontal-margin)));
   font-weight: 400;
   font-size: 1.1rem;
-  color: #555;
+  color: var(--color-muted);
 }
 
 #main h2 > i{
@@ -152,7 +186,7 @@ h1, h2{
   position: absolute;
   left: var(--main-blocks-title-icon-offset-left);
   z-index: 1; /* over decorator line */
-  color: #444;
+  color: var(--color-ink);
 }
 
 #main h2::after{ /* extends the decorator line */
@@ -244,7 +278,7 @@ h1, h2{
   width: var(--decorator-outer-dim);
   height: var(--decorator-outer-dim);
   border-radius: calc(var(--decorator-outer-dim) / 2);
-  background-color: #fff;
+  background-color: var(--color-bg);
 }
 
 .decorator::after{
@@ -256,7 +290,7 @@ h1, h2{
   width: calc(var(--decorator-outer-dim) - (var(--decorator-border-width) * 2));
   height: calc(var(--decorator-outer-dim) - (var(--decorator-border-width) * 2));
   border-radius: calc((var(--decorator-outer-dim) - (var(--decorator-border-width) * 2)) / 2);
-  background-color: #555;
+  background-color: var(--color-ink);
 }
 
 .blocks:last-child .decorator{ /* slightly shortens it */
@@ -272,7 +306,7 @@ h1, h2{
 }
 
 .details header{
-  color: #000;
+  color: var(--color-ink);
 }
 
 .details h3{
@@ -385,11 +419,11 @@ h1, h2{
   font-style: italic;
   line-height: 1.1;
   text-align: right;
-  color: #777;
+  color: var(--color-muted);
 }
 
 #disclaimer code{
-  color: #666;
+  color: var(--color-muted);
   font-family: "Source Code Pro";
   font-weight: 400;
   font-style: normal;
@@ -426,87 +460,18 @@ h1, h2{
   break-inside: avoid;
 }
 
-/* === Emphasis & utility classes (NEW) === */
-strong, b { font-weight: 700; }   /* ensure <strong> actually looks bold with body weight 300 */
-.bold { font-weight: 700; }       /* use class="bold" for reusable emphasis */
-.hi   { font-weight: 800; }       /* extra-bold option */
-.muted{ opacity: .75; }           /* optional de-emphasis */
+/* === Emphasis & utility classes === */
+strong, b, .bold { font-weight: 700; }
+.hi   { font-weight: 800; }
+.muted{ opacity: .75; }
 
-/* === Key elements to emphasize (NEW) === */
-.details header h3 { 
-  font-weight: 700;               /* job/course title */
-  display: inline; 
-  margin-right: .25rem; 
-}
-.details header .place { 
-  font-weight: 600;               /* organization label */
-}
-.aside h2, 
-#main h2 { 
-  font-weight: 600;               /* bump section headers slightly from 400 */
-}
+.aside h2,
+#main h2 { font-weight: 600; }
 
-/* === Date emphasis — for END-FIRST order (NEW) === */
-/* If you used the JS tweak that shows END date first, bold the first span: */
-#main .blocks .date span:first-child { font-weight: 700; }  /* current/end date */
-#main .blocks .date span:last-child  { opacity: .75; }      /* start date, muted */
-
-/* If you keep START-FIRST order instead, swap the two rules above:
-#main .blocks .date span:last-child  { font-weight: 700; }
-#main .blocks .date span:first-child { opacity: .75; }
-*/
-
-/* === Sidebar skill labels (NEW) === */
 #technical-skills p strong { font-weight: 700; }
 
-/* Ensure bold actually appears with Open Sans */
-body { 
-  font-family: "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-weight: 300;
-  font-synthesis: weight style;       /* allow faux bold if a weight fails to load */
-}
-
-/* Bold utilities */
-strong, b { font-weight: 700; }       /* real bold */
-.bold { font-weight: 700; }
-.hi   { font-weight: 800; }
-
-/* Headings and key labels a bit heavier for contrast */
-#main h2, .aside h2        { font-weight: 600; }
-.details header h3         { font-weight: 700; }
-.details header .place     { font-weight: 600; }
-
-/* Dates — if you’re using END-FIRST order from the JS tweak */
-#main .blocks .date span:first-child { font-weight: 700; }  /* current/end */
-#main .blocks .date span:last-child  { opacity: .75; }      /* start, muted */
-
-/* Print/PDF safeguards */
-@media print {
-  strong, b, .bold { font-weight: 700; }
-}
 /* Add top margin when jumping to anchors */
 #main .blocks { scroll-margin-top: 0.3in; }
-
-/* --- Fix header layout: title on its own line; org + location below --- */
-.details header h3 {
-  display: block;            /* was inline; block keeps it on its own row */
-  font-weight: 700;
-  margin: 0 0 .1rem 0;
-}
-
-/* Keep org left, location right; add a bit of spacing if you want */
-.details header .place    { float: left;  font-weight: 600; }
-.details header .location { float: right; }
-
-/* Ensure the header grows to contain the floats */
-.details header::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-/* Add a subtle separator when they wrap to the same line on narrow widths */
-.details header .place::after { content: ""; margin-right: .25rem; }
 
 /* --- Header layout: title on its own line; org + location below --- */
 .details header {
@@ -516,33 +481,56 @@ strong, b { font-weight: 700; }       /* real bold */
 }
 
 .details header h3 {
-  flex-basis: 100%;       /* full row */
+  flex-basis: 100%;
   display: block;
   margin: 0 0 .1rem 0;
   font-weight: 700;
-  clear: both;            /* in case old floats sneak in */
 }
 
-/* kill the old float layout and use flex spacing */
 .details header .place,
 .details header .location {
-  float: none !important;
+  float: none;
 }
 
 .details header .place {
-  order: 2;               /* row 2, left by default */
   font-weight: 600;
 }
 
 .details header .location {
-  order: 2;               /* same row, pushed right */
   margin-left: auto;
 }
 
-/* optional: a hair more breathing room below the header line */
 .details header + div {
   margin-top: .15rem;
 }
+
+/* Dates — END-FIRST order (matches the JS tweak that shows end date first) */
+#main .blocks .date span:first-child { font-weight: 700; }  /* current/end */
+#main .blocks .date span:last-child  { opacity: .75; }      /* start, muted */
+#main .blocks .date span { font-variant-numeric: tabular-nums; }
+
+/* === Publication status badges === */
+.status {
+  display: inline-block;
+  font-style: normal;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+}
+.status-review    { color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 15%, transparent); }
+.status-preprint  { color: #a15c00; background: #fff1dc; }
+.status-published { color: #0a6b3d; background: #e2f6ea; }
+
+/* === Selected Projects === */
+.project { margin: var(--space-3) 0; break-inside: avoid; }
+.project h3 { font-size: 0.8rem; font-weight: 700; color: var(--color-ink); margin-bottom: 0.1rem; }
+.project-meta { font-size: 0.68rem; color: var(--color-muted); margin: 0.1rem 0 0.15rem; }
+.project-meta a { color: var(--color-accent); }
+.project p:not(.project-meta) { margin: 0.1rem 0 0; }
+.project code { font-size: 0.9em; }
 
 /* Publications: show year in the same left column as dates */
 #pubs .level3 ul { margin-left: calc(var(--date-block-width) + var(--decorator-horizontal-margin)); }
@@ -577,12 +565,53 @@ strong, b { font-weight: 700; }       /* real bold */
   border-left: var(--decorator-border);
 }
 
+/* === Responsive: collapse to one column below ~768px === */
+@media screen and (max-width: 768px) {
+  body { width: 100%; margin: 0; }
+  .pagedjs_pages { max-width: 100%; }
+
+  #aside, .aside, #main {
+    float: none;
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  #title { left: 0; margin: var(--space-4) var(--space-4) var(--space-3); }
+  .aside { padding: var(--space-4); background: var(--color-sidebar-bg); }
+  #main { padding: 0 var(--space-4); }
+
+  .date { text-align: left; }
+  .details header .place,
+  .details header .location { flex-basis: 100%; margin-left: 0; }
+  #disclaimer { position: static; text-align: left; margin-top: var(--space-4); }
+}
+
+/* === Focus visibility for keyboard nav on internal anchors === */
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* === Print: show URLs after external links, control page breaks === */
+@media print {
+  /* only in main content (projects/publications) — the sidebar already
+     shows plain identifiers (LinkedIn/GitHub), doesn't need the raw URL too */
+  #main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: var(--color-muted);
+    word-break: break-all;
+  }
+  #main a[href^="#"]::after,
+  .project-meta a::after {
+    content: "";
+  }
+  .blocks, .project { break-inside: avoid; }
+  #main h2 { break-after: avoid; }
+}
+
 #pubs {
   page-break-before: always;   /* for PDF and older browsers */
   break-before: page;          /* for modern paged.js / print engines */
-}
-
-#awards {
-  page-break-after: always;
-  break-after: page;
 }
